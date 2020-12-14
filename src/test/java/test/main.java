@@ -1,8 +1,14 @@
 package test;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
+import model.*;
+
 public class main {
+	private List<Patient> fileAttente = new ArrayList<Patient>();
+	private Compte connected;
 
 	public static int saisieInt(String msg) 
 	{
