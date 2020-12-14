@@ -10,9 +10,8 @@ public class Medecin extends Compte{
 	public Medecin() {
 	}
 
-	public Medecin(Integer id, String login, String password, String typeCompte, Salle salle) {
+	public Medecin(Integer id, String login, String password, Salle salle) {
 		super(id, login, password);
-		this.typeCompte = typeCompte;
 		this.salle = salle;
 	}
 	
@@ -21,20 +20,21 @@ public class Medecin extends Compte{
 	}
 	
 	public void afficherPatient (Patient patient) {
-		
+		System.out.println("J'afficher le patient");
 	}
 	
 	public void rendreSalle() {
-		
+		System.out.println("Je rends la salle");
 	}
 	
 	public Patient afficherProchainPatient(List<Patient> listAttente) {
+		System.out.println("J'affiche le prochain patient");
 		Patient patient = null;
 		return patient;
 	}
 	
-	public void saveList(List<Visite> fileAlistVisite) {
-		
+	public void saveList() {
+		System.out.println("Je sauvegarde la liste de mes visites");
 	}
 
 	public String getTypeCompte() {

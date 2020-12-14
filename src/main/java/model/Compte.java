@@ -15,8 +15,8 @@ public abstract class Compte {
 		this.password = password;
 	}
 	
-	public void afficherListAttente(List<Patient> fileAttente) {
-		
+	public static void afficherListAttente(List<Patient> fileAttente) {
+		System.out.println("J'affiche la liste d'attente");
 	}
 
 	public Integer getId() {
