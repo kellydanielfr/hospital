@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 
 
@@ -14,7 +15,7 @@ public class Medecin extends Compte{
 	
 	private Salle salle;
 	
-	@OneToMany
+	@Transient
 	private List<Visite> listVisite;
 	
 	public Medecin() {}

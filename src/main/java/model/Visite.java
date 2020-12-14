@@ -18,10 +18,10 @@ public class Visite {
 	private Integer numero;
 	
 	@OneToOne
-	private Patient id_patient;
+	private Patient patient;
 	
 	@OneToOne
-	private Medecin id_medecin;
+	private Medecin medecin;
 	private Integer count =20;
 	
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="visite")
@@ -33,10 +33,10 @@ public class Visite {
 	
 	public Visite() {}
 
-	public Visite(Integer numero, Patient id_patient, Medecin id_medecin, Integer cout, Salle salle, LocalDate date) {
+	public Visite(Integer numero, Patient patient, Medecin medecin, Integer cout, Salle salle, LocalDate date) {
 		this.numero = numero;
-		this.id_patient = id_patient;
-		this.id_medecin = id_medecin;
+		this.patient = patient;
+		this.medecin = medecin;
 		this.count = cout;
 		this.salle = salle;
 		this.date = date;
@@ -51,19 +51,19 @@ public class Visite {
 	}
 
 	public Patient getId_patient() {
-		return id_patient;
+		return patient;
 	}
 
-	public void setId_patient(Patient id_patient) {
-		this.id_patient = id_patient;
+	public void setId_patient(Patient patient) {
+		this.patient = patient;
 	}
 
 	public Medecin getId_medecin() {
-		return id_medecin;
+		return medecin;
 	}
 
-	public void setId_medecin(Medecin id_medecin) {
-		this.id_medecin = id_medecin;
+	public void setId_medecin(Medecin medecin) {
+		this.medecin = medecin;
 	}
 
 	public Integer getCout() {
@@ -92,7 +92,7 @@ public class Visite {
 
 	@Override
 	public String toString() {
-		return "Visite [numero=" + numero + ", id_patient=" + id_patient + ", id_medecin=" + id_medecin + ", cout="
+		return "Visite [numero=" + numero + ", patient=" + patient + ", medecin=" + medecin + ", cout="
 				+ count + ", salle=" + salle + ", date=" + date + "]";
 	}
 }

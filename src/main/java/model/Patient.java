@@ -10,21 +10,13 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Table;
 
 @Entity
-
-
 public class Patient implements Serializable{
 	
 	
@@ -32,7 +24,7 @@ public class Patient implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String id;
+	private Integer id;
 	
 	private String nom, prenom;
 	
@@ -45,7 +37,7 @@ public class Patient implements Serializable{
 	public Patient() {}
 	
 
-	public Patient(String id, String nom, String prenom, Adresse adresse) {
+	public Patient(Integer id, String nom, String prenom, Adresse adresse) {
 		this.id = id;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -86,11 +78,11 @@ public class Patient implements Serializable{
 		return fileAttente;
 	}
 
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

@@ -55,7 +55,7 @@ public class main {
 		String login = saisieString("Saisir votre login:");
 		String password = saisieString("Saisir votre pasword:");
 		
-		//TODO: Compte connected = Context.getInstance().getDaoCompte().selectByLoginMdp(login, password);
+		connected = Context.getInstance().getDaoCompte().SelectByLoginMdp(login, password);
 		
 		if (connected==null) {
 			System.out.println("Mauvais identifiants");
@@ -84,7 +84,7 @@ public class main {
 		case 2: ((Medecin) connected).rendreSalle();break;
 		case 3: System.out.println(((Medecin) connected).afficherProchainPatient(fileAttente));break;
 		case 4: ((Medecin) connected).saveList();break;
-		case 5: connected = null;menuPrincipal();break;
+		case 5: connected = null; menuPrincipal();break;
 		default: menuMedecin();break;
 		}
 		
@@ -153,9 +153,7 @@ public class main {
 			System.out.println("Le patient n'existe pas");
 			menuSecretaire();
 		}else {
-			patient = Context.getInstance().getDaoPatient().findById(numPatient);
 			((Secretaire) connected).afficherHistorique(patient);
 		}
 	}
-
 }
