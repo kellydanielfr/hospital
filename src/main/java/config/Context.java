@@ -12,7 +12,6 @@ import dao.jpa.DAOvisite;
 
 public class Context {
 
-	
 	private static Context _instance=null;
 	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("hospital");
 	private IDAOCompte daoCompte= new DAOcompte();
@@ -59,6 +58,4 @@ public class Context {
 	public void setDaoVisite(IDAOVisite daoVisite) {
 		this.daoVisite = daoVisite;
 	}
-	 
-	
 }
