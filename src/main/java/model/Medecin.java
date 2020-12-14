@@ -2,13 +2,22 @@ package model;
 
 import java.util.List;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+
+
+
+@Entity
+@DiscriminatorValue("Medecin")
 public class Medecin extends Compte{
-	private String typeCompte = "Medecin";
+	
 	private Salle salle;
+	
+	@OneToMany
 	private List<Visite> listVisite;
 	
-	public Medecin() {
-	}
+	public Medecin() {}
 
 	public Medecin(Integer id, String login, String password, Salle salle) {
 		super(id, login, password);
@@ -37,14 +46,6 @@ public class Medecin extends Compte{
 		System.out.println("Je sauvegarde la liste de mes visites");
 	}
 
-	public String getTypeCompte() {
-		return typeCompte;
-	}
-
-	public void setTypeCompte(String typeCompte) {
-		this.typeCompte = typeCompte;
-	}
-
 	public Salle getSalle() {
 		return salle;
 	}
@@ -55,7 +56,7 @@ public class Medecin extends Compte{
 
 	@Override
 	public String toString() {
-		return "Medecin [typeCompte=" + typeCompte + ", salle=" + salle + ", listVisite=" + listVisite + ", id=" + id
+		return "Medecin [salle=" + salle + ", listVisite=" + listVisite + ", id=" + id
 				+ ", login=" + login + ", password=" + password + "]";
 	}
 

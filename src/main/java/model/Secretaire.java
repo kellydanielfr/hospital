@@ -2,11 +2,13 @@ package model;
 
 import java.util.List;
 
-import config.Context;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
+@Entity
+@DiscriminatorValue("Secretaire")
 public class Secretaire extends Compte{
-	private String typeCompte = "Secretaire";
-
+	
 	
 	public Secretaire() {
 	}
@@ -50,17 +52,13 @@ public class Secretaire extends Compte{
 		return true;
 	}
 
-	public String getTypeCompte() {
-		return typeCompte;
-	}
-
-	public void setTypeCompte(String typeCompte) {
-		this.typeCompte = typeCompte;
-	}
-
 	@Override
 	public String toString() {
-		return "Secretaire [typeCompte=" + typeCompte + ", id=" + id + ", login=" + login + ", password=" + password
-				+ "]";
+		return "Secretaire [id=" + id + ", login=" + login + ", password=" + password + "]";
 	}
+
+
+
+
+	
 }

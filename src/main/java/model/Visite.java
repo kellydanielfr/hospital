@@ -2,12 +2,32 @@ package model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+
+@Entity
 public class Visite {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer numero;
+	
+	@OneToOne
 	private Patient id_patient;
+	
+	@OneToOne
 	private Medecin id_medecin;
-	private Integer cout =20;
+	private Integer count =20;
+	
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="visite")
 	private Salle salle;
+	
+	@Column(columnDefinition = "DATE")
 	private LocalDate date;
 	
 	
@@ -17,7 +37,7 @@ public class Visite {
 		this.numero = numero;
 		this.id_patient = id_patient;
 		this.id_medecin = id_medecin;
-		this.cout = cout;
+		this.count = cout;
 		this.salle = salle;
 		this.date = date;
 	}
@@ -47,11 +67,11 @@ public class Visite {
 	}
 
 	public Integer getCout() {
-		return cout;
+		return count;
 	}
 
 	public void setCout(Integer cout) {
-		this.cout = cout;
+		this.count = cout;
 	}
 
 	public Salle getSalle() {
@@ -73,6 +93,6 @@ public class Visite {
 	@Override
 	public String toString() {
 		return "Visite [numero=" + numero + ", id_patient=" + id_patient + ", id_medecin=" + id_medecin + ", cout="
-				+ cout + ", salle=" + salle + ", date=" + date + "]";
+				+ count + ", salle=" + salle + ", date=" + date + "]";
 	}
 }
