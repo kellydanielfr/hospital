@@ -1,0 +1,34 @@
+package test;
+
+import java.util.Scanner;
+
+public class main {
+
+	public static int saisieInt(String msg) 
+	{
+		System.out.println(msg);
+		Scanner sc = new Scanner(System.in);
+		return sc.nextInt();
+	}
+
+	public static double saisieDouble(String msg) 
+	{
+		System.out.println(msg);
+		Scanner sc = new Scanner(System.in);
+		return sc.nextDouble();
+	}
+
+
+	public static String saisieString(String msg) 
+	{
+		System.out.println(msg);
+		Scanner sc = new Scanner(System.in);
+		return sc.nextLine();
+	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
