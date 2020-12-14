@@ -4,6 +4,7 @@ public class Adresse {
 	private Integer numero;
 	private String voie, ville, cp;
 	
+	
 	public Adresse() {}
 
 	public Adresse(Integer numero, String voie, String ville, String cp) {
