@@ -2,16 +2,21 @@ package model;
 
 import java.util.List;
 
-public class Secretaire extends Compte{
-	private String typeCompte = "Secretaire";
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
+
+@Entity
+@DiscriminatorValue("Secretaire")
+public class Secretaire extends Compte{
+	
 	
 	public Secretaire() {
 	}
 
-	public Secretaire(Integer id, String login, String password, String typeCompte) {
+	public Secretaire(Integer id, String login, String password) {
 		super(id, login, password);
-		this.typeCompte = typeCompte;
+		
 	}
 	
 	public List<Patient> ajouterPatient(Patient patient){
@@ -34,17 +39,13 @@ public class Secretaire extends Compte{
 		return true;
 	}
 
-	public String getTypeCompte() {
-		return typeCompte;
-	}
-
-	public void setTypeCompte(String typeCompte) {
-		this.typeCompte = typeCompte;
-	}
-
 	@Override
 	public String toString() {
-		return "Secretaire [typeCompte=" + typeCompte + ", id=" + id + ", login=" + login + ", password=" + password
-				+ "]";
+		return "Secretaire [id=" + id + ", login=" + login + ", password=" + password + "]";
 	}
+
+
+
+
+	
 }
