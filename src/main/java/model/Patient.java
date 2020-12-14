@@ -15,58 +15,84 @@ public class Patient implements Serializable{
 	private String nom, prenom;
 	private Adresse adresse;
 	
+	public Patient() {}
+	
 
-	public static void ecrireObject(List<Patient> fileAttente) 
-	{
-		
-			
+	public Patient(String id, String nom, String prenom, Adresse adresse) {
+		this.id = id;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.adresse = adresse;
+	}
+
+
+	public static void ecrireObject(List<Patient> fileAttente) {	
 		String chemin="fileAttente.txt";
 		File monFichier = new File(chemin);
 		
-		try (
-				FileOutputStream fos = new FileOutputStream(monFichier);
-				ObjectOutputStream oos = new ObjectOutputStream(fos);
-			){
+		try (	FileOutputStream fos = new FileOutputStream(monFichier);
+				ObjectOutputStream oos = new ObjectOutputStream(fos);){
 		
 			for (Patient p : fileAttente) {
 				oos.writeObject(p);
 			}
-		}
-		catch(IOException e) 
-		{
+		}catch(IOException e){
 			e.printStackTrace();
-		}
-		
-		
-		
+		}	
 	}
 	
-	public static List<Patient> lireObject() 
-	{
+	public static List<Patient> lireObject(){
 		List<Patient> fileAttente = new ArrayList<Patient>();
 		String chemin="fileAttente.txt";
 		File monFichier = new File(chemin);
 		
-		try (
-				FileInputStream fis = new FileInputStream(monFichier);
-				ObjectInputStream ois = new ObjectInputStream(fis);
-			){
+		try (	FileInputStream fis = new FileInputStream(monFichier);
+				ObjectInputStream ois = new ObjectInputStream(fis);){
 		
-			
-			for(Patient p : (List<Patient>)ois.readObject()) 
-			{
+			for(Patient p : (List<Patient>)ois.readObject()){
 				System.out.println(p);
 				fileAttente.add(p);
 			}
-			
-		
-		}
-		catch(Exception e ) 
-		{
+		}catch(Exception e ){
 			e.printStackTrace();
 		}
-		
 		return fileAttente;
-		
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public String getPrenom() {
+		return prenom;
+	}
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+
+	public Adresse getAdresse() {
+		return adresse;
+	}
+
+	public void setAdresse(Adresse adresse) {
+		this.adresse = adresse;
+	}
+
+	@Override
+	public String toString() {
+		return "Patient [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", adresse=" + adresse + "]";
 	}
 }
