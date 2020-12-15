@@ -1,5 +1,6 @@
 package model;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -28,14 +29,17 @@ public abstract class Compte {
 	
 	public Compte() {}
 
-	public Compte(Integer id, String login, String password) {
-		this.id = id;
+	public Compte(String login, String password) {
 		this.login = login;
 		this.password = password;
 	}
 	
-	public static void afficherListAttente(List<Patient> fileAttente) {
-		System.out.println("J'affiche la liste d'attente");
+	public static void afficherListAttente(LinkedList<Patient> fileAttente) {
+		System.out.println("J'affiche la liste d'attente: ");
+		for (Patient patient : fileAttente) {
+			System.out.println(patient);
+			System.out.println("----------------------------");
+		}
 	}
 
 	public Integer getId() {

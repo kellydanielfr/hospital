@@ -4,11 +4,13 @@ import java.io.File;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FilePermission;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -23,16 +25,12 @@ public class Patient implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
 	private String nom, prenom;
 	
-	
 	@Embedded
 	private Adresse adresse;
-	
-	
 	
 	public Patient() {}
 	
@@ -45,7 +43,7 @@ public class Patient implements Serializable{
 	}
 
 
-	public static void ecrireObject(List<Patient> fileAttente) {	
+	public static void ecrireObject(LinkedList<Patient> fileAttente) {	
 		String chemin="fileAttente.txt";
 		File fileDattente = new File(chemin);
 		
@@ -59,9 +57,24 @@ public class Patient implements Serializable{
 			e.printStackTrace();
 		}	
 	}
+
+	public static void lireObjecttest(){
+		String chemin="fileAttente.txt";
+		File fileDattente = new File(chemin);
+		
+		try (	FileInputStream fis = new FileInputStream(fileDattente);
+				ObjectInputStream ois = new ObjectInputStream(fis);){
+		
+			for(Patient p : (List<Patient>)ois.readObject()){
+				System.out.println(p);
+			}
+		}catch(Exception e ){
+			e.printStackTrace();
+		}
+	}
 	
-	public static List<Patient> lireObject(){
-		List<Patient> fileAttente = new ArrayList<Patient>();
+	public static LinkedList<Patient> lireObject(){
+		LinkedList<Patient> fileAttente = new LinkedList<Patient>();
 		String chemin="fileAttente.txt";
 		File fileDattente = new File(chemin);
 		
@@ -112,6 +125,9 @@ public class Patient implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Patient [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", adresse=" + adresse + "]";
+		return "Securité social: " + id + 
+				"\n nom: " + nom + 
+				"\n prenom: " + prenom + 
+				"\n adresse: " + adresse;
 	}
 }

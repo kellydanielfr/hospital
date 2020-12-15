@@ -1,7 +1,9 @@
 package test;
 
 import java.nio.channels.AlreadyConnectedException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -9,7 +11,7 @@ import config.Context;
 import model.*;
 
 public class main {
-	private static List<Patient> fileAttente = new ArrayList<Patient>();
+	private static LinkedList<Patient> fileAttente = new LinkedList<Patient>();
 	private static Compte connected = null;
 
 	public static int saisieInt(String msg) 
@@ -37,11 +39,23 @@ public class main {
 	public static void main(String[] args) {
 		
 		//Tests
-//		Medecin m1 = new Medecin(1, "m1", "pass", Salle.SALLE1);
-//		Secretaire s1 = new Secretaire(2, "s1", "pass");
-//		connected = s1;
-//		connected = m1;
+//		Medecin m1 = new Medecin("m1", "pass", Salle.SALLE1);
+//		Medecin m2 = new Medecin("m2", "pass", Salle.SALLE2);
+//		Secretaire s1 = new Secretaire("s1", "pass");
+//		
+//		Context.getInstance().getDaoCompte().insert(s1);
+//		Context.getInstance().getDaoCompte().insert(m1);
+//		Context.getInstance().getDaoCompte().insert(m2);
+
+		Adresse a1 = new Adresse(1, "voie", "ville", "cp");
+		Patient p1 = new Patient(123, "nom", "prenom", a1);
+		fileAttente.add(p1);
+		Adresse a2 = new Adresse(2, "voie", "ville", "cp");
+		Patient p2 = new Patient(124, "nom", "prenom", a1);
+		fileAttente.add(p2);
 		
+		
+		//Patient.lireObjecttest();
 		menuPrincipal();
 	}
 	
@@ -81,7 +95,7 @@ public class main {
 		
 		switch (choix) {
 		case 1: Compte.afficherListAttente(fileAttente);break;
-		case 2: ((Medecin) connected).rendreSalle();break;
+		case 2: ((Medecin) connected).rendreSalle(fileAttente);break;
 		case 3: System.out.println(((Medecin) connected).afficherProchainPatient(fileAttente));break;
 		case 4: ((Medecin) connected).saveList();break;
 		case 5: connected = null; menuPrincipal();break;
@@ -138,7 +152,15 @@ public class main {
 		if (((Secretaire) connected).verifPatient(numPatient)) {
 			patient = Context.getInstance().getDaoPatient().findById(numPatient);
 		}else {
-			patient = ((Secretaire) connected).creerPatient(numPatient);
+			System.out.println("Il faut le créer: ");
+			String nom = saisieString("Nom du patient:");
+			String prenom = saisieString("Prenom du patient:");
+			Integer numero = saisieInt("Numero de la voie:");
+			String voie = saisieString("Nom de la voie: ");
+			String ville = saisieString("Nom de la ville: ");
+			String cp = saisieString("Code postal : ");
+			
+			patient = ((Secretaire) connected).creerPatient(numPatient, nom, prenom, numero, voie, ville, cp);
 		}
 		
 		fileAttente = ((Secretaire) connected).ajouterPatient(patient, fileAttente);
@@ -147,13 +169,11 @@ public class main {
 	private static void afficherHistorique() {
 		Integer numPatient = saisieInt("Entrez le numero de secu du patient:");
 		
-		Patient patient = Context.getInstance().getDaoPatient().findById(numPatient);
-		
-		if (patient == null) {
-			System.out.println("Le patient n'existe pas");
-			menuSecretaire();
-		}else {
+		if (((Secretaire) connected).verifPatient(numPatient)) {
+			Patient patient = Context.getInstance().getDaoPatient().findById(numPatient);
 			((Secretaire) connected).afficherHistorique(patient);
+		}else {
+			menuSecretaire();
 		}
 	}
 }

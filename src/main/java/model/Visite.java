@@ -33,11 +33,9 @@ public class Visite {
 	
 	public Visite() {}
 
-	public Visite(Integer numero, Patient patient, Medecin medecin, Integer cout, Salle salle, LocalDate date) {
-		this.numero = numero;
+	public Visite(Patient patient, Medecin medecin, Salle salle, LocalDate date) {
 		this.patient = patient;
 		this.medecin = medecin;
-		this.count = cout;
 		this.salle = salle;
 		this.date = date;
 	}
@@ -92,7 +90,9 @@ public class Visite {
 
 	@Override
 	public String toString() {
-		return "Visite [numero=" + numero + ", patient=" + patient + ", medecin=" + medecin + ", cout="
-				+ count + ", salle=" + salle + ", date=" + date + "]";
+		return "Medecin: " + medecin + 
+				", cout: " + count + 
+				", salle: " + salle + 
+				", date :" + date;
 	}
 }

@@ -1,11 +1,13 @@
 package model;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 
 @Embeddable
 
-public class Adresse {
+public class Adresse implements Serializable{
 	private Integer numero;
 	private String voie, ville, cp;
 	
@@ -53,6 +55,9 @@ public class Adresse {
 
 	@Override
 	public String toString() {
-		return "Adresse [numero=" + numero + ", voie=" + voie + ", ville=" + ville + ", cp=" + cp + "]";
+		return "numero: " + numero + 
+				"\n voie: " + voie + 
+				"\n ville: " + ville + 
+				"\n cp: " + cp;
 	}
 }
