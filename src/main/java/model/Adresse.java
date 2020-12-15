@@ -6,8 +6,10 @@ import javax.persistence.*;
 
 
 @Embeddable
-
 public class Adresse implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
 	private Integer numero;
 	private String voie, ville, cp;
 	
@@ -55,9 +57,6 @@ public class Adresse implements Serializable{
 
 	@Override
 	public String toString() {
-		return "numero: " + numero + 
-				"\n voie: " + voie + 
-				"\n ville: " + ville + 
-				"\n cp: " + cp;
+		return  numero + " voie " + " " + voie + " "+ ville + " " + cp;
 	}
 }

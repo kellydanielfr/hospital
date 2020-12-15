@@ -49,13 +49,14 @@ public class main {
 
 		Adresse a1 = new Adresse(1, "voie", "ville", "cp");
 		Patient p1 = new Patient(123, "nom", "prenom", a1);
+//		Context.getInstance().getDaoPatient().insert(p1);
 		fileAttente.add(p1);
 		Adresse a2 = new Adresse(2, "voie", "ville", "cp");
-		Patient p2 = new Patient(124, "nom", "prenom", a1);
+		Patient p2 = new Patient(124, "nom", "prenom", a2);
 		fileAttente.add(p2);
+//		Context.getInstance().getDaoPatient().insert(p2);
 		
 		
-		//Patient.lireObjecttest();
 		menuPrincipal();
 	}
 	

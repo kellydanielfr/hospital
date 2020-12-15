@@ -4,7 +4,6 @@ import java.io.File;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FilePermission;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -14,15 +13,13 @@ import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Patient implements Serializable{
-	
-	
+
 	private static final long serialVersionUID = 1L;
+
 
 	@Id
 	private Integer id;
@@ -50,28 +47,12 @@ public class Patient implements Serializable{
 		try (	FileOutputStream fos = new FileOutputStream(fileDattente);
 				ObjectOutputStream oos = new ObjectOutputStream(fos);){
 		
-			for (Patient p : fileAttente) {
-				oos.writeObject(p);
-			}
+				oos.writeObject(fileAttente);
 		}catch(IOException e){
 			e.printStackTrace();
 		}	
 	}
 
-	public static void lireObjecttest(){
-		String chemin="fileAttente.txt";
-		File fileDattente = new File(chemin);
-		
-		try (	FileInputStream fis = new FileInputStream(fileDattente);
-				ObjectInputStream ois = new ObjectInputStream(fis);){
-		
-			for(Patient p : (List<Patient>)ois.readObject()){
-				System.out.println(p);
-			}
-		}catch(Exception e ){
-			e.printStackTrace();
-		}
-	}
 	
 	public static LinkedList<Patient> lireObject(){
 		LinkedList<Patient> fileAttente = new LinkedList<Patient>();
@@ -81,10 +62,8 @@ public class Patient implements Serializable{
 		try (	FileInputStream fis = new FileInputStream(fileDattente);
 				ObjectInputStream ois = new ObjectInputStream(fis);){
 		
-			for(Patient p : (List<Patient>)ois.readObject()){
-				System.out.println(p);
-				fileAttente.add(p);
-			}
+			fileAttente = (LinkedList<Patient>) ois.readObject();
+			
 		}catch(Exception e ){
 			e.printStackTrace();
 		}
@@ -125,7 +104,7 @@ public class Patient implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Securité social: " + id + 
+		return "n° Secu: " + id + 
 				"\n nom: " + nom + 
 				"\n prenom: " + prenom + 
 				"\n adresse: " + adresse;

@@ -32,7 +32,7 @@ public class Medecin extends Compte{
 	}
 	
 	public void rendreSalle(LinkedList<Patient> fileAttente) {
-		Patient nextPatient = afficherProchainPatient(fileAttente);
+		Patient nextPatient = returnProchainPatient(fileAttente);
 		creerVisite(nextPatient);
 	}
 	
