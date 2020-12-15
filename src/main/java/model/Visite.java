@@ -93,6 +93,7 @@ public class Visite {
 		return "Medecin: " + medecin + 
 				", cout: " + count + 
 				", salle: " + salle + 
-				", date :" + date;
+				", date :" + date +
+				", Patient " + patient.getId();
 	}
 }

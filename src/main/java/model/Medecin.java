@@ -70,6 +70,11 @@ public class Medecin extends Compte{
 		
 		System.out.println("La liste des visites a été sauvegardée");
 	}
+	public void afficheAllVisite() {
+		for (Visite visite : Context.getInstance().getDaoVisite().findByMedecin(this.id)) {
+			System.out.println(visite);
+		}
+	}
 
 	public Salle getSalle() {
 		return salle;
@@ -77,6 +82,15 @@ public class Medecin extends Compte{
 
 	public void setSalle(Salle salle) {
 		this.salle = salle;
+	}
+
+	
+	public List<Visite> getListVisite() {
+		return listVisite;
+	}
+
+	public void setListVisite(List<Visite> listVisite) {
+		this.listVisite = listVisite;
 	}
 
 	@Override

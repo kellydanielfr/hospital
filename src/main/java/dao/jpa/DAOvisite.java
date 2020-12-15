@@ -69,4 +69,11 @@ public class DAOvisite implements IDAOVisite{
 		return maRequete.getResultList();
 	}
 	
+	@Override
+	public List<Visite> findByMedecin(Integer id_medecin) {
+		EntityManager em=Context.getInstance().getEmf().createEntityManager();
+		Query maRequete = em.createQuery("from Visite where medecin_id=:id_medecin",Visite.class);
+		maRequete.setParameter("id_medecin",id_medecin);
+		return maRequete.getResultList();
+	}
 }

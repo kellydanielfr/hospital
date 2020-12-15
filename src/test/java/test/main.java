@@ -16,8 +16,20 @@ public class main {
 
 	public static int saisieInt(String msg) 
 	{
-		System.out.println(msg);
-		Scanner sc = new Scanner(System.in);
+		Scanner sc =null;
+		boolean error=false;
+		do {
+			System.out.println(msg);
+			sc = new Scanner(System.in);
+			if (!sc.hasNextInt()) {
+				System.out.println("Ceci n'est pas un nombre");
+				error=true;
+				sc.next();
+			}else {
+				error=false;
+			}
+		} while (error);
+		
 		return sc.nextInt();
 	}
 
@@ -55,6 +67,14 @@ public class main {
 		Patient p2 = new Patient(124, "nom", "prenom", a2);
 		fileAttente.add(p2);
 //		Context.getInstance().getDaoPatient().insert(p2);
+		Adresse a3 = new Adresse(3, "voie", "ville", "cp");
+		Patient p3 = new Patient(125, "nom", "prenom", a3);
+		fileAttente.add(p3);
+//		Context.getInstance().getDaoPatient().insert(p3);
+		Adresse a4 = new Adresse(4, "voie", "ville", "cp");
+		Patient p4 = new Patient(126, "nom", "prenom", a4);
+		fileAttente.add(p4);
+//		Context.getInstance().getDaoPatient().insert(p4);
 		
 		
 		menuPrincipal();
@@ -70,12 +90,15 @@ public class main {
 		String login = saisieString("Saisir votre login:");
 		String password = saisieString("Saisir votre pasword:");
 		
-		connected = Context.getInstance().getDaoCompte().SelectByLoginMdp(login, password);
-		
-		if (connected==null) {
+		try {
+			connected = Context.getInstance().getDaoCompte().SelectByLoginMdp(login, password);
+		} catch (Exception e) {
 			System.out.println("Mauvais identifiants");
 			menuPrincipal();
-		}else if (connected instanceof Secretaire) {
+		}
+		
+		
+		if (connected instanceof Secretaire) {
 			menuSecretaire();
 		}else {
 			menuMedecin();
@@ -90,7 +113,9 @@ public class main {
 		System.out.println("2-Rendre la salle");
 		System.out.println("3-Afficher le prochain patient");
 		System.out.println("4-Sauvegarder la liste des visites");
-		System.out.println("5-Deconnexion");
+		System.out.println("5-Afficher mes visites en cours");
+		System.out.println("6-Afficher toutes mes visites");
+		System.out.println("7-Deconnexion");
 		
 		int choix = saisieInt("");
 		
@@ -99,7 +124,9 @@ public class main {
 		case 2: ((Medecin) connected).rendreSalle(fileAttente);break;
 		case 3: System.out.println(((Medecin) connected).afficherProchainPatient(fileAttente));break;
 		case 4: ((Medecin) connected).saveList();break;
-		case 5: connected = null; menuPrincipal();break;
+		case 5: System.out.println(((Medecin) connected).getListVisite());break;
+		case 6: ((Medecin) connected).afficheAllVisite();break;
+		case 7: ((Medecin) connected).saveList(); connected = null; menuPrincipal();break;
 		default: menuMedecin();break;
 		}
 		
